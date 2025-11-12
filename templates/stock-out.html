@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Out / Warranty</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="menu-btn" id="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="logo-container">
+            <img src="/static/images/logo.jpg" alt="Company Logo" class="logo-img">
+        </div>
+    </div>
+    <div id="side-nav" class="side-nav">
+    <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
+
+    <a href="/home">Stock In</a>
+    <a href="/stock-out">Stock Out (Warranty)</a>
+    <a href="/stock-view">Detailed Report</a>
+    <a href="/summary">Summary Report</a>
+
+    {% if current_user.role == 'admin' %}
+        <a href="/admin-users" class="admin-link">User Management</a>
+    {% endif %}
+
+    <a href="/logout" class="logout-link">Logout</a>
+</div>
+    <div id="overlay"></div>
+    <h1>Warranty Activation</h1>
+    <h2 class="username-display">User: {{ current_user.username }} ({{ current_user.role }})</h2>
+    <p>Scan a single battery barcode to activate.</p>
+
+    <div id="reader-container">
+        <div id="reader"></div>
+    </div>
+
+    <div id="result-message">Processing...</div>
+    <button id="scan-again-btn" style="display:none;">Scan Another Battery</button>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="/static/stock-out.js"></script>
+    
+    <script src="/static/nav.js"></script>
+</body>
+</html>

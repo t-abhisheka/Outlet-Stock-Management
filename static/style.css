@@ -1,0 +1,251 @@
+/* --- Dark Mode & General Body --- */
+body { 
+    font-family: Arial, sans-serif; 
+    padding: 20px;
+    background-color: #121212;
+    color: #e0e0e0;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 80px; /* Add padding to top to avoid new header */
+}
+
+h1 {
+    text-align: center;
+    font-size: 18pt;
+}
+
+/* --- NEW HEADER & LOGO --- */
+.header {
+    background-color: #000000;
+    padding: 10px 20px;
+    position: fixed; /* Stick to top */
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    /* This centers the logo, while menu btn is on left */
+    justify-content: center; 
+}
+.logo-container {
+    text-align: center;
+}
+.logo-img {
+    max-width: 200px; /* Made slightly smaller */
+    height: auto;
+}
+
+/* --- NEW 3-DOT MENU BUTTON --- */
+.menu-btn {
+    position: absolute; /* Position on the left */
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 102;
+}
+.menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #e0e0e0;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* --- NEW SIDE NAV PANE --- */
+.side-nav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 103;
+    top: 0;
+    left: 0;
+    background-color: #1e1e1e;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    transform: translateX(-250px); /* Hidden by default */
+}
+.side-nav.active {
+    transform: translateX(0); /* Show when active */
+}
+.side-nav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #e0e0e0;
+    display: block;
+    transition: 0.2s;
+}
+.side-nav a:hover {
+    background-color: #007bff;
+    color: white;
+}
+.side-nav .close-btn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* --- NEW OVERLAY --- */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 101;
+    display: none; /* Hidden by default */
+}
+#overlay.active {
+    display: block; /* Show when active */
+}
+
+/* --- Scanner Styles (Unchanged) --- */
+#reader { 
+    width: 100%; 
+    max-width: 500px; 
+    margin: 10px auto; 
+    border: 1px solid #444;
+    border-radius: 5px;
+}
+
+/* --- Buttons & Inputs (Dark Mode) --- */
+button,
+#search-input,
+#date-filter {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 12px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+button { cursor: pointer; }
+button:hover { background-color: #444; }
+
+/* Set color scheme for date picker */
+#date-filter {
+    color-scheme: dark;
+}
+
+/* --- "Stock In" List (Unchanged) --- */
+#result { border: 1px solid #444; padding: 10px; margin-top: 20px; }
+#scanned-list li { background: #2a2a2a; border: 1px solid #444; padding: 8px; margin-bottom: 5px; border-radius: 4px; }
+
+/* --- "Stock Out" Messages (Unchanged) --- */
+.status-success { background-color: #1a4a2a; border: 1px solid #2a6a3a; color: #d4edda; }
+.status-error { background-color: #4a1a2a; border: 1px solid #6a2a3a; color: #f8d7da; }
+.status-loading { background-color: #333; border: 1px solid #555; color: #e0e0e0; }
+#result-message { font-size: 1.2em; padding: 15px; margin: 20px auto; border-radius: 5px; display: none; max-width: 500px; text-align: center; }
+
+
+/* --- "Stock View" Table (Unchanged) --- */
+#loading { text-align: center; font-size: 1.2em; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #444; padding: 12px; text-align: left; }
+th { background-color: #333; }
+tr:nth-child(even) { background-color: #222; }
+tr:hover { background-color: #3a3a3a; }
+
+/* --- "Stock View" Search & Tabs (Updated) --- */
+#search-input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.tab-nav {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+.tab-buttons {
+    display: flex;
+}
+.tab-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    color: #e0e0e0;
+}
+.tab-button:hover { background-color: #222; }
+.tab-button.active {
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
+    color: #00aaff;
+}
+
+/* --- Username Display --- */
+.username-display {
+    text-align: center;
+    font-size: 1em;
+    font-weight: normal;
+    color: #00aaff; /* Bright blue to stand out */
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+/* --- Logout Link --- */
+.side-nav .logout-link {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #444;
+    color: #ff4d4d; /* Red color for logout */
+}
+
+.side-nav .logout-link:hover {
+    background-color: #4a1a2a;
+    color: #f8d7da;
+}
+
+/* --- Admin Link in Side Nav --- */
+.side-nav .admin-link {
+    color: #ffc107; /* Yellow color for admin */
+    font-weight: bold;
+    border-top: 1px solid #444;
+}
+.side-nav .admin-link:hover {
+    background-color: #5a4300;
+    color: #ffc107;
+}
+
+/* Fix for logout link border */
+.side-nav .logout-link {
+    border-top: 1px solid #444;
+}
+.side-nav .admin-link + .logout-link {
+    /* Don't show double border if admin link is present */
+    border-top: none; 
+}
+
+/* --- Download Button --- */
+.download-btn-container {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.download-btn {
+    background-color: #28a745; /* Green */
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.download-btn:hover {
+    background-color: #218838;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Stock-In</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="menu-btn" id="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="logo-container">
+            <img src="/static/images/logo.jpg" alt="Company Logo" class="logo-img">
+        </div>
+    </div>
+    <div id="side-nav" class="side-nav">
+    <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
+
+    <a href="/home">Stock In</a>
+    <a href="/stock-out">Stock Out (Warranty)</a>
+    <a href="/stock-view">Detailed Report</a>
+    <a href="/summary">Summary Report</a>
+
+    {% if current_user.role == 'admin' %}
+        <a href="/admin-users" class="admin-link">User Management</a>
+    {% endif %}
+
+    <a href="/logout" class="logout-link">Logout</a>
+</div>
+    <div id="overlay"></div>
+    <h1>Battery Stock-In Scanner</h1>
+    <h2 class="username-display">User: {{ current_user.username }} ({{ current_user.role }})</h2>
+
+    <div id="reader"></div>
+    <button id="submit-btn" style="display:none;">Submit Stock</button>
+
+    <div id="result">
+        <h3>Scanned Barcodes (Batch):</h3>
+        <ul id="scanned-list">
+            <li>Scanning...</li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="/static/scanner.js"></script>
+    
+    <script src="/static/nav.js"></script>
+</body>
+</html>

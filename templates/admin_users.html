@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    <div class="header">
+        <div class="menu-btn" id="menu-btn"><span></span><span></span><span></span></div>
+        <div class="logo-container"><img src="/static/images/logo.jpg" alt="Company Logo" class="logo-img"></div>
+    </div>
+    <div id="side-nav" class="side-nav">
+        <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
+        <a href="/home">Stock In</a>
+        <a href="/stock-out">Stock Out (Warranty)</a>
+        <a href="/stock-view">Detailed Report</a>
+        <a href="/summary">Summary Report</a>
+        {% if current_user.role == 'admin' %}
+            <a href="/admin-users" class="admin-link">User Management</a>
+        {% endif %}
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+    <div id="overlay"></div>
+    <h1>Admin: User Management</h1>
+    <h2 class="username-display">User: {{ current_user.username }} ({{ current_user.role }})</h2>
+
+    <div class="admin-container">
+        <h3>Add New User</h3>
+        <form id="add-user-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                    <option value="executive">Showroom Executive</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit" class="admin-btn">Create User</button>
+        </form>
+    </div>
+
+    <div class="admin-container">
+        <h3>Existing Users</h3>
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="users-table-body">
+                </tbody>
+        </table>
+    </div>
+
+    <script src="/static/nav.js"></script>
+    <script src="/static/admin_users.js"></script>
+    <div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <h4>Change Password</h4>
+        <p>User: <strong id="modal-username"></strong></p>
+        <form id="edit-password-form">
+            <input type="hidden" id="modal-user-id">
+            <div class="form-group">
+                <label for="new_password">New Password</label>
+                <input type="password" id="new_password" required>
+            </div>
+            <button type="submit" class="admin-btn">Update Password</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
